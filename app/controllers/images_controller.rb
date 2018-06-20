@@ -8,16 +8,7 @@ class ImagesController < ApplicationController
     render :show, json: @image
   end
 
-  def load_image_service(service = nil)
+  def load_image_service(service = ImageService.new)
     @image_service ||= service
   end
-
-  private
-    def set_image
-      @image = Image.find(params[:id])
-    end
-
-    def image_params
-      params.fetch(:image, {})
-    end
 end
