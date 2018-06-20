@@ -1,13 +1,13 @@
-require 'rails_helper'
+require "rails_helper"
 
 RSpec.describe ImageService do
   describe "store_image" do
     let(:fixture) do
-      file_fixture('images/portrait.jpg')
+      file_fixture("images/portrait.jpg")
     end
 
     let(:content_type) do
-      'image/jpeg'
+      "image/jpeg"
     end
 
     let(:filename) do
@@ -25,7 +25,7 @@ RSpec.describe ImageService do
     it "stores a row in database" do
       expect {
         ImageService.new.store_image(filepath, filename, content_type)
-      }.to change{Image.count}.by(1)
+      }.to change { Image.count }.by(1)
     end
 
     it "returns expected image" do
@@ -40,7 +40,7 @@ RSpec.describe ImageService do
 
   describe "fetch_image" do
     let!(:image) do
-      fixture = file_fixture('images/portrait.jpg')
+      fixture = file_fixture("images/portrait.jpg")
       img = Image.new(
         filename: fixture.basename.to_s,
         data: fixture.read,

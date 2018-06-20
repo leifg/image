@@ -1,4 +1,4 @@
-require 'rails_helper'
+require "rails_helper"
 
 RSpec.describe ImagesController, type: :controller do
 
@@ -12,7 +12,7 @@ RSpec.describe ImagesController, type: :controller do
 
   describe "POST #create" do
     let(:fixture) do
-      file_fixture('images/portrait.jpg')
+      file_fixture("images/portrait.jpg")
     end
 
     let(:image_id) do
@@ -20,7 +20,7 @@ RSpec.describe ImagesController, type: :controller do
     end
 
     let(:content_type) do
-      'image/jpeg'
+      "image/jpeg"
     end
 
     let(:filename) do
@@ -40,14 +40,14 @@ RSpec.describe ImagesController, type: :controller do
     end
 
     before do
-      request.headers.merge!({'ACCEPT' => 'application/json'})
-      post :create, params: {image: fixture_file_upload(fixture.to_path, content_type)}
+      request.headers.merge!("ACCEPT" => "application/json")
+      post :create, params: { image: fixture_file_upload(fixture.to_path, content_type) }
     end
 
     context "with valid params" do
       it "returns JSON response with 200 OK" do
         expect(response).to have_http_status(:ok)
-        expect(response.content_type).to eq('application/json')
+        expect(response.content_type).to eq("application/json")
       end
 
       it "returns expected JSON response" do
@@ -62,14 +62,14 @@ RSpec.describe ImagesController, type: :controller do
       end
 
       it "calls ImageService" do
-        expect(image_service).to have_received(:store_image).with(a_string_ending_with('.jpg'), filename, content_type)
+        expect(image_service).to have_received(:store_image).with(a_string_ending_with(".jpg"), filename, content_type)
       end
     end
   end
 
   describe "GET #show" do
     let(:fixture) do
-      file_fixture('images/portrait.jpg')
+      file_fixture("images/portrait.jpg")
     end
 
     let(:image_id) do
@@ -77,7 +77,7 @@ RSpec.describe ImagesController, type: :controller do
     end
 
     let(:content_type) do
-      'image/jpeg'
+      "image/jpeg"
     end
 
     let(:filename) do
@@ -103,12 +103,12 @@ RSpec.describe ImagesController, type: :controller do
     end
 
     before do
-      get :show, params: {id: "#{image_id}.jpg"}
+      get :show, params: { id: "#{image_id}.jpg" }
     end
 
     it "returns jpg response with 200 OK" do
       expect(response).to have_http_status(:ok)
-      expect(response.content_type).to eq('image/jpeg')
+      expect(response.content_type).to eq("image/jpeg")
     end
 
     it "returns body of image" do

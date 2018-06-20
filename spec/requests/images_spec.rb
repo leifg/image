@@ -1,9 +1,9 @@
-require 'rails_helper'
+require "rails_helper"
 
 RSpec.describe "Images", type: :request do
   describe "POST /images" do
     let(:fixture) do
-      file_fixture('images/portrait.jpg')
+      file_fixture("images/portrait.jpg")
     end
 
     let(:content_type) do
@@ -11,20 +11,20 @@ RSpec.describe "Images", type: :request do
     end
 
     it "returns 200 OK" do
-      post images_path, params: {image: fixture_file_upload(fixture.to_path, content_type)}
+      post images_path, params: { image: fixture_file_upload(fixture.to_path, content_type) }
       expect(response).to have_http_status(200)
     end
 
     it "writes to database" do
       expect {
-        post images_path, params: {image: fixture_file_upload(fixture.to_path, content_type)}
-      }.to change{Image.count}.by(1)
+        post images_path, params: { image: fixture_file_upload(fixture.to_path, content_type) }
+      }.to change { Image.count }.by(1)
     end
   end
 
   describe "GET /images/:id.jpg" do
     let!(:image) do
-      fixture = file_fixture('images/portrait.jpg')
+      fixture = file_fixture("images/portrait.jpg")
       img = Image.new(
         filename: fixture.basename.to_s,
         data: fixture.read,
