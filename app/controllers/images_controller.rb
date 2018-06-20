@@ -1,43 +1,16 @@
 class ImagesController < ApplicationController
-  before_action :set_image, only: [:show, :update, :destroy]
-
-  # GET /images
-  # GET /images.json
-  def index
-    @images = Image.all
-  end
+  before_action :set_image, only: [:show]
 
   # GET /images/1
   # GET /images/1.json
   def show
   end
 
-  # POST /images
-  # POST /images.json
   def create
-    @image = Image.new(image_params)
+    puts params.inspect
 
-    if @image.save
-      render :show, status: :created, location: @image
-    else
-      render json: @image.errors, status: :unprocessable_entity
-    end
-  end
-
-  # PATCH/PUT /images/1
-  # PATCH/PUT /images/1.json
-  def update
-    if @image.update(image_params)
-      render :show, status: :ok, location: @image
-    else
-      render json: @image.errors, status: :unprocessable_entity
-    end
-  end
-
-  # DELETE /images/1
-  # DELETE /images/1.json
-  def destroy
-    @image.destroy
+    @image = {}
+    render :show, json: @image
   end
 
   private
