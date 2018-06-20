@@ -49,10 +49,13 @@ RSpec.describe ImagesController, type: :controller do
 
       it "returns expected JSON response" do
         result = JSON.parse(response.body)
+
         expect(result["id"]).to eq(image_id)
         expect(result["content_type"]).to eq(content_type)
         expect(result["filename"]).to eq(filename)
         expect(result["filesize"]).to eq(filesize)
+
+        expect(result.has_key?("data")).to be false
       end
 
       it "calls ImageService" do
