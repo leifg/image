@@ -16,6 +16,8 @@ The only external requirement currently is Postgres. It will remap the default p
 
 ## Usage
 
+### Storing Images
+
 to store an image, create a multipart/upload request to the endpoint: `/images`. The binary data of the image need to be added under the key `image`.
 
 curl example:
@@ -39,6 +41,10 @@ The result will look like this:
   "filesize": 3633674
 }
 ```
+
+### Fetching Images
+
+To fetch an image, send a get request to `/images/<image_id>`. 
 
 ## Attributions
 
