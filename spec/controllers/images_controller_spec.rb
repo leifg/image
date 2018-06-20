@@ -114,5 +114,9 @@ RSpec.describe ImagesController, type: :controller do
     it "returns body of image" do
       expect(response.body).to eq(fixture.read)
     end
+
+    it "calls ImageService" do
+      expect(image_service).to have_received(:fetch_image).with(image_id)
+    end
   end
 end

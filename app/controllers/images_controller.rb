@@ -8,7 +8,8 @@ class ImagesController < ApplicationController
   end
 
   def show
-    @image = @image_service.fetch_image(params["id"])
+    image_id, _ = params["id"].split(".")
+    @image = @image_service.fetch_image(image_id.to_i)
     send_data @image.data, type: 'image/jpeg', disposition: 'inline'
   end
 
