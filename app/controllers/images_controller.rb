@@ -8,7 +8,8 @@ class ImagesController < ApplicationController
     render :show, json: @image
   end
 
-  def load_image_service(service = ImageService.new)
-    @image_service ||= service
-  end
+  private
+    def load_image_service(service = ImageService.new)
+      @image_service ||= service
+    end
 end

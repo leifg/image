@@ -33,9 +33,13 @@ RSpec.describe ImagesController, type: :controller do
   describe "POST #create" do
     context "with valid params" do
       before do
-        controller.load_image_service(image_service)
+        controller.instance_variable_set(:@image_service, image_service)
         request.headers.merge!({'ACCEPT' => 'application/json'})
         post :create, params: {image: fixture_file_upload(fixture.to_path, content_type)}
+      end
+
+      after do
+        controller.instance_variable_set(:@image_service, nil)
       end
 
       it "returns JSON response with 200 OK" do
