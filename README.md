@@ -6,13 +6,26 @@ Unlike other image storage services that have a web front-end and target end-use
 
 ## Setup
 
-To locally run the service, start the dependencies in docker via:
+To locally run the service, start the dependencies in Docker via:
 
 ```shell
 docker-compose up
 ```
 
 The only external requirement currently is Postgres. It will remap the default postgres port (5432) to 5433 to avoid collition with locally run postgres installations.
+
+After the database is started you can create and migrate via
+
+```shell
+bundle exec rails db:create
+bundle exec rails db:migrate
+```
+
+and finally start the server:
+
+```shell
+bundle exec rails server
+```
 
 ## Usage
 
@@ -44,7 +57,7 @@ The result will look like this:
 
 ### Fetching Images
 
-To fetch an image, send a get request to `/images/<image_id>`. 
+To fetch an image, send a get request to `/images/<image_id>`.
 
 ## Attributions
 
