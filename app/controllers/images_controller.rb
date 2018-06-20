@@ -9,17 +9,15 @@ class ImagesController < ApplicationController
   def create
     puts params.inspect
 
-    @image = {}
+    @image = Image.new(id: 2711, content_type: "image/jpeg", filename: "portrait.jpg", filesize: 82844)
     render :show, json: @image
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
     def set_image
       @image = Image.find(params[:id])
     end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
     def image_params
       params.fetch(:image, {})
     end
