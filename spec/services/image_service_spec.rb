@@ -44,7 +44,7 @@ RSpec.describe ImageService do
       img = Image.new(
         filename: fixture.basename.to_s,
         data: fixture.read,
-        content_type: "image/jpg",
+        content_type: "image/jpeg",
         filesize: fixture.size,
       )
       img.save!
