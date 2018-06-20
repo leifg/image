@@ -37,4 +37,24 @@ RSpec.describe ImageService do
       expect(image.filesize).to eq(filesize)
     end
   end
+
+  describe "fetch_image" do
+    let!(:image) do
+      fixture = file_fixture('images/portrait.jpg')
+      img = Image.new(
+        filename: fixture.basename.to_s,
+        data: fixture.read,
+        content_type: "image/jpg",
+        filesize: fixture.size,
+      )
+      img.save!
+      img
+    end
+
+    it "returns expected image" do
+      returned_image = ImageService.new.fetch_image(image.id)
+
+      expect(returned_image.id).to eq(image.id)
+    end
+  end
 end

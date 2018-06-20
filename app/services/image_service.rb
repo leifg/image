@@ -10,4 +10,8 @@ class ImageService
     image.save!
     image
   end
+
+  def fetch_image(image_id)
+    Image.find(image_id)
+  end
 end
