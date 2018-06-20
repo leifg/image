@@ -22,9 +22,18 @@ RSpec.describe ImagesController, type: :controller do
     fixture.size
   end
 
+  let(:expected_image) do
+    Image.new(id: image_id, content_type: content_type, filename: filename, filesize: filesize)
+  end
+
+  let(:image_service) do
+    spy("ImageService", store_image: expected_image)
+  end
+
   describe "POST #create" do
     context "with valid params" do
       before do
+        controller.load_image_service(image_service)
         request.headers.merge!({'ACCEPT' => 'application/json'})
         post :create, params: {image: fixture_file_upload(fixture.to_path, content_type)}
       end
@@ -40,6 +49,10 @@ RSpec.describe ImagesController, type: :controller do
         expect(result["content_type"]).to eq(content_type)
         expect(result["filename"]).to eq(filename)
         expect(result["filesize"]).to eq(filesize)
+      end
+
+      it "calls ImageService" do
+        expect(image_service).to have_received(:store_image).with(a_string_ending_with('.jpg'), filename, content_type)
       end
     end
   end
